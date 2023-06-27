@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PokeList</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="pokemon_id">POKEMON ID</string>
+    <string name="pokemon_name">POKEMON NAME</string>
+    <string name="pokemon_picture">POKEMON PICTURE</string>
+    <string name="view">View</string>
+    <string name="back">Back</string>
+    <string name="list_count">List Count</string>
+    <string name="next">Next</string>
+    <string name="default_list_count">20</string>
+    <string name="retry">Retry</string>
+    <string name="no_results">No Results</string>
+    <string name="view_a_pokemon">View a Pokemon</string>
+</resources>

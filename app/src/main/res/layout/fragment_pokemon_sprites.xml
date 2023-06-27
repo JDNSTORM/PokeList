@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/purple_200"
+    tools:context=".ui.fragments.PokemonSpritesFragment">
+
+    <ImageView
+        android:id="@+id/pokemon_default"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/pokemon_picture"
+        android:src="@drawable/egg" />
+    <ImageView
+        android:id="@+id/pokemon_shiny"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/pokemon_picture"
+        android:src="@drawable/egg_shiny" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/initial_state"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:visibility="gone"
+        tools:visibility="visible"
+        style="@style/TextAppearance.Material3.HeadlineLarge"
+        android:text="@string/view_a_pokemon"
+        android:gravity="center"/>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible"
+        style="?attr/progressBarStyle"/>
+    <LinearLayout
+        android:id="@+id/layout_retry"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Error occurred"
+            android:padding="10dp"
+            style="@style/TextAppearance.Material3.HeadlineLarge"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:textAllCaps="true"
+            />
+    </LinearLayout>
+
+</LinearLayout>
