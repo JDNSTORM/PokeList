@@ -51,8 +51,10 @@ class PokeAPIRepository @Inject constructor(
         return Pager(
             pagingConfig,
             initialKey,
-            localMediator,
-            localPagingSourceFactory
+//            localMediator,
+            remoteMediator,
+//            localPagingSourceFactory
+            pagingSourceFactory
         ).flow
     }
 
