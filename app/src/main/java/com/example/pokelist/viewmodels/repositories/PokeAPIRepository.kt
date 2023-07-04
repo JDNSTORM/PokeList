@@ -11,7 +11,7 @@ import com.example.pokelist.viewmodels.repositories.poke_api.PokeListMediator
 import com.example.pokelist.viewmodels.repositories.poke_api.RemoteDataSource
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalDataSource
-import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSource
+import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSourceFactory
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSourceMediator
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
@@ -35,18 +35,23 @@ class PokeAPIRepository @Inject constructor(
             { list: List<Pokemon> -> local.insertList(list) },
             { local.clearPokeList() }
         )
-        val pagingSourceFactory = { local.getPokeListPagingSource() }
+        val pagingSourceFactory = {
+            Log.d("RoomPagingSource", "Loaded")
+            local.getPokeListPagingSource()
+        }
+
+        val localPagingSourceFactory = LocalPagingSourceFactory(
+                { offset: Int, limit: Int -> local.getList(offset, limit) },
+                { offset: Int, limit: Int -> remote.getListDirectly(offset, limit) },
+                { list: List<Pokemon> -> local.insertList(list) }
+            )
 
         val localMediator = LocalPagingSourceMediator(
             { offset: Int, limit: Int -> remote.getListDirectly(offset, limit) },
             { list: List<Pokemon> -> local.insertList(list) },
-            { local.clearPokeList() }
+            { local.clearPokeList() },
+            { localPagingSourceFactory.invalidatePagingSource() }
         )
-        val localPagingSourceFactory = { LocalPagingSource (
-            { offset: Int, limit: Int -> local.getList(offset, limit) },
-            { offset: Int, limit: Int -> remote.getListDirectly(offset, limit) },
-            { list: List<Pokemon> -> local.insertList(list) }
-        ) }
 
         return Pager(
             pagingConfig,

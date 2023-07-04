@@ -13,7 +13,8 @@ import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
 class LocalPagingSourceMediator(
     private val loadList: suspend (Int, Int) -> List<Pokemon>,
     private val storeList: suspend (List<Pokemon>) -> Unit,
-    private val clearTable: suspend () -> Unit
+    private val clearTable: suspend () -> Unit,
+    private val invalidate: () -> Unit
 ): RemoteMediator<Int, Pokemon>() {
 
     override suspend fun initialize(): InitializeAction = InitializeAction.LAUNCH_INITIAL_REFRESH
@@ -25,7 +26,7 @@ class LocalPagingSourceMediator(
 //        trackState(state)
         val offset = when(loadType){
             LoadType.REFRESH -> {
-                clearTable.invoke()
+                clearTable()
                 state.anchorPosition?.let { position ->
                     val closestPage = state.closestPageToPosition(position)
                     closestPage?.prevKey ?: closestPage?.nextKey
@@ -48,7 +49,9 @@ class LocalPagingSourceMediator(
         return try {
             val pokeList = loadList(offset, pageSize)
             storeList(pokeList)
-            MediatorResult.Success(pokeList.isEmpty())
+            MediatorResult.Success(pokeList.isEmpty()).also {
+                invalidate()
+            }
         }catch (e: Exception){
             MediatorResult.Error(e)
         }

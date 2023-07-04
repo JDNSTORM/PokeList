@@ -1,6 +1,7 @@
 package com.example.pokelist.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -61,6 +62,7 @@ class PokeListFragment : BaseFragment<FragmentPokeListBinding>() {
     }
 
     private fun FragmentPokeListBinding.monitorListState(state: CombinedLoadStates){
+        state.track()
         val isListEmpty = state.source.refresh is LoadState.NotLoading
                 && state.append is LoadState.NotLoading
                 && pokemonList.adapter?.itemCount == 0
@@ -80,5 +82,17 @@ class PokeListFragment : BaseFragment<FragmentPokeListBinding>() {
         errorState?.let {
             errorMessage.text = it.error.localizedMessage
         }
+    }
+
+    private fun CombinedLoadStates.track(){
+        Log.d("Prepend", prepend.toString())
+        Log.d("Refresh", refresh.toString())
+        Log.d("Append", append.toString())
+        Log.d("SourcePrepend", source.prepend.toString())
+        Log.d("SourceRefresh", source.refresh.toString())
+        Log.d("SourceAppend", source.append.toString())
+        Log.d("MediatorPrepend", mediator?.prepend.toString())
+        Log.d("MediatorRefresh", mediator?.refresh.toString())
+        Log.d("MediatorAppend", mediator?.append.toString())
     }
 }
