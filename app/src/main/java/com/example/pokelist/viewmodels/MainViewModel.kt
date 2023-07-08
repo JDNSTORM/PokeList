@@ -19,15 +19,12 @@ class MainViewModel @Inject constructor(
     val pokeListPagingData = repository.getPokeListStream().cachedIn(viewModelScope)
     private val _viewedPokemon: MutableStateFlow<InfoState> = MutableStateFlow(InfoState.Initial)
     val viewedState: StateFlow<InfoState> = _viewedPokemon.asStateFlow()
-    val getInfo: (Int) -> Unit
-
-    init {
-        getInfo = { id ->
-            viewModelScope.launch {
-                _viewedPokemon.emit(InfoState.Loading)
-                val state = repository.getInfoAsInfoState(id)
-                _viewedPokemon.emit(state)
-            }
+    val getInfo: (Int) -> Unit = { id ->
+        viewModelScope.launch {
+            _viewedPokemon.emit(InfoState.Loading)
+            val state = repository.getInfoAsInfoState(id)
+            _viewedPokemon.emit(state)
         }
     }
+
 }
