@@ -27,6 +27,11 @@
         android:layout_height="0dp"
         android:layout_weight="3"
         android:outlineProvider="bounds"
+        android:orientation="horizontal"
         android:padding="15dp" />
-
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/info_tab_layout"
+        style="@style/Widget.MaterialComponents.TabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
 </LinearLayout>

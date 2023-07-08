@@ -1,5 +1,6 @@
 package com.example.pokelist.ui
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.viewpager2.widget.ViewPager2
 import com.example.pokelist.adapters.FragmentsAdapter
 import com.example.pokelist.adapters.PokemonsAdapter
 import com.example.pokelist.adapters.PokemonsLoadStateAdapter
@@ -19,6 +21,7 @@ import com.example.pokelist.ui.fragments.PokemonFragment
 import com.example.pokelist.ui.fragments.PokemonSpritesFragment
 import com.example.pokelist.viewmodels.MainViewModel
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -55,7 +58,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         pokemonInfoPager.adapter = fragmentAdapter
-        pokemonInfoPager.layoutDirection
+
+        TabLayoutMediator(infoTabLayout, pokemonInfoPager){ _, _ -> }.attach()
     }
 
     private fun SectionPokeListBinding.setupRecyclerView(

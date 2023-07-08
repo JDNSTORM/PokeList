@@ -21,12 +21,33 @@
         android:layout_height="match_parent"
         android:background="?android:attr/listDivider" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pokemon_info_pager"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:outlineProvider="bounds"
-        android:padding="15dp" />
+        android:orientation="vertical"
+        >
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pokemon_info_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:outlineProvider="bounds"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/info_tab_layout"
+            android:padding="15dp" />
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/info_tab_layout"
+            style="@style/Widget.MaterialComponents.TabLayout"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_gravity="center"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
