@@ -9,6 +9,7 @@ import androidx.room.paging.util.getClippedRefreshKey
 import com.example.pokelist.viewmodels.repositories.poke_api.PokeAPIModule
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
 
+@Deprecated("Paging doesn't behave as intended so this Mediator is ineffective")
 @OptIn(ExperimentalPagingApi::class)
 class LocalPagingSourceMediator(
     private val loadList: suspend (Int, Int) -> List<Pokemon>,
@@ -17,7 +18,7 @@ class LocalPagingSourceMediator(
     private val invalidate: () -> Unit
 ): RemoteMediator<Int, Pokemon>() {
 
-    override suspend fun initialize(): InitializeAction = InitializeAction.LAUNCH_INITIAL_REFRESH
+    override suspend fun initialize(): InitializeAction = InitializeAction.SKIP_INITIAL_REFRESH
 
     override suspend fun load(
         loadType: LoadType,
@@ -50,7 +51,7 @@ class LocalPagingSourceMediator(
             val pokeList = loadList(offset, pageSize)
             storeList(pokeList)
             MediatorResult.Success(pokeList.isEmpty()).also {
-                invalidate()
+                if (!it.endOfPaginationReached) invalidate()
             }
         }catch (e: Exception){
             MediatorResult.Error(e)

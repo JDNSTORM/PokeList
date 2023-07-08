@@ -11,6 +11,7 @@ import com.example.pokelist.viewmodels.repositories.poke_api.PokeListMediator
 import com.example.pokelist.viewmodels.repositories.poke_api.RemoteDataSource
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalDataSource
+import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSource
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSourceFactory
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSourceMediator
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -40,26 +41,26 @@ class PokeAPIRepository @Inject constructor(
             local.getPokeListPagingSource()
         }
 
-        val localPagingSourceFactory = LocalPagingSourceFactory(
-                { offset: Int, limit: Int -> local.getList(offset, limit) },
-                { offset: Int, limit: Int -> remote.getListDirectly(offset, limit) },
-                { list: List<Pokemon> -> local.insertList(list) }
-            )
-
-        val localMediator = LocalPagingSourceMediator(
+        val localPagingSourceFactory = { LocalPagingSource(
+            { offset: Int, limit: Int -> local.getList(offset, limit) },
             { offset: Int, limit: Int -> remote.getListDirectly(offset, limit) },
-            { list: List<Pokemon> -> local.insertList(list) },
-            { local.clearPokeList() },
-            { localPagingSourceFactory.invalidatePagingSource() }
-        )
+            { list: List<Pokemon> -> local.insertList(list) }
+        ) }
+
+//        val localMediator = LocalPagingSourceMediator(
+//            { offset: Int, limit: Int -> remote.getListDirectly(offset, limit) },
+//            { list: List<Pokemon> -> local.insertList(list) },
+//            { local.clearPokeList() },
+//            { localPagingSourceFactory.invalidatePagingSource() }
+//        )
 
         return Pager(
             pagingConfig,
             initialKey,
 //            localMediator,
-            remoteMediator,
-//            localPagingSourceFactory
-            pagingSourceFactory
+//            remoteMediator,
+            pagingSourceFactory =  localPagingSourceFactory
+//            pagingSourceFactory
         ).flow
     }
 

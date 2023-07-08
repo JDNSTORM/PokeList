@@ -39,16 +39,16 @@ class PokemonSpritesFragment : BaseFragment<FragmentPokemonSpritesBinding>() {
     }
 
     private fun FragmentPokemonSpritesBinding.bind(sprites: Sprites){
-        loadImage(pokemonDefault, R.drawable.egg, sprites.frontDefault)
-        loadImage(pokemonShiny, R.drawable.egg_shiny, sprites.frontShiny)
+        pokemonDefault.load(R.drawable.egg, sprites.frontDefault)
+        pokemonShiny.load(R.drawable.egg_shiny, sprites.frontShiny)
     }
 
-    private fun loadImage(view: ImageView, @DrawableRes placeholder: Int, url: String){
-        Glide.with(view)
+    private fun ImageView.load(@DrawableRes placeholder: Int, url: String){
+        Glide.with(this)
             .load(url)
             .placeholder(placeholder)
             .error(R.drawable.egg)
-            .into(view)
+            .into(this)
     }
 
     private fun FragmentPokemonSpritesBinding.loadState(state: InfoState, retry: (Int) -> Unit){

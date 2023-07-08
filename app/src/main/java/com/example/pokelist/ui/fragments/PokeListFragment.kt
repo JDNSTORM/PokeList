@@ -62,7 +62,7 @@ class PokeListFragment : BaseFragment<FragmentPokeListBinding>() {
     }
 
     private fun FragmentPokeListBinding.monitorListState(state: CombinedLoadStates){
-        state.track()
+//        state.track()
         val isListEmpty = state.source.refresh is LoadState.NotLoading
                 && state.append is LoadState.NotLoading
                 && pokemonList.adapter?.itemCount == 0
@@ -94,5 +94,24 @@ class PokeListFragment : BaseFragment<FragmentPokeListBinding>() {
         Log.d("MediatorPrepend", mediator?.prepend.toString())
         Log.d("MediatorRefresh", mediator?.refresh.toString())
         Log.d("MediatorAppend", mediator?.append.toString())
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d("PokeList", "ViewCreated")
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        Log.d("PokeList", "ViewDestroyed")
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        Log.d("PokeList", "FragmentDestroyed")
+        super.onDestroy()
     }
 }

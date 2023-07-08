@@ -17,24 +17,19 @@ class LocalPagingSource(
             state.closestPageToPosition(it)?.prevKey
                 ?: state.closestPageToPosition(it)?.nextKey
         }
-        Log.d("RefreshKey", refreshKey.toString())
-        trackState(state)
         return refreshKey
-//        return null
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
         val position = params.key?.takeIf { it > PokeAPIModule.DEFAULT_OFFSET } ?: PokeAPIModule.DEFAULT_OFFSET
         Log.d("Anchor", position.toString())
         return try {
-            val localList = getListLocally(position, params.loadSize)
-//                .takeUnless { it.isEmpty() }
-            val pokeList = localList
+            val pokeList = getListLocally(position, params.loadSize).takeUnless { it.isEmpty() }
                 ?: kotlin.run {
-                val remoteList = getListRemotely(position, params.loadSize)
-                storeList(remoteList)
-                remoteList
-            }
+                    val remoteList = getListRemotely(position, params.loadSize)
+                    storeList(remoteList)
+                    remoteList
+                }
             val prevKey = params.key?.minus(params.loadSize)?.takeIf { it > PokeAPIModule.DEFAULT_OFFSET }
             val nextKey = if (pokeList.isEmpty()){
                 null
