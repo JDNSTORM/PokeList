@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                 && pokemonList.adapter?.itemCount == 0
         val isError = state.refresh is LoadState.Error
                 && pokemonList.adapter?.itemCount == 0
-        listEmpty.isVisible = isListEmpty
+        listEmpty.isVisible = isListEmpty && !isError && !isLoading
         pokemonList.isVisible = !isListEmpty && !isLoading && !isError
         progressBar.isVisible = isLoading
         layoutRetry.isVisible = isError

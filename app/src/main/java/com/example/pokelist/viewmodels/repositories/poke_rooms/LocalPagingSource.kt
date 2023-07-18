@@ -11,7 +11,7 @@ class LocalPagingSource(
     private val getListLocally: suspend (Int, Int) -> List<Pokemon>,
     private val getListRemotely: suspend (Int, Int) -> List<Pokemon>,
     private val storeList: suspend (List<Pokemon>) -> Unit
-    ): PagingSource<Int, Pokemon>() {
+): PagingSource<Int, Pokemon>() {
     override fun getRefreshKey(state: PagingState<Int, Pokemon>): Int? {
         val refreshKey = state.anchorPosition?.let {
             state.closestPageToPosition(it)?.prevKey

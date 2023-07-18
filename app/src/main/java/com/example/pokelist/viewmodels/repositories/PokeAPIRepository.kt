@@ -28,7 +28,7 @@ class PokeAPIRepository @Inject constructor(
     fun getPokeListStream(): Flow<PagingData<Pokemon>> {
         val pagingConfig = PagingConfig(
             PokeAPIModule.DEFAULT_LIMIT,
-            enablePlaceholders = false
+            enablePlaceholders = true
         )
         val initialKey = PokeAPIModule.DEFAULT_OFFSET
         val remoteMediator = PokeListMediator(
@@ -37,7 +37,6 @@ class PokeAPIRepository @Inject constructor(
             { local.clearPokeList() }
         )
         val pagingSourceFactory = {
-            Log.d("RoomPagingSource", "Loaded")
             local.getPokeListPagingSource()
         }
 
@@ -58,9 +57,9 @@ class PokeAPIRepository @Inject constructor(
             pagingConfig,
             initialKey,
 //            localMediator,
-//            remoteMediator,
-            pagingSourceFactory =  localPagingSourceFactory
-//            pagingSourceFactory
+            remoteMediator,
+//            pagingSourceFactory =  localPagingSourceFactory
+            pagingSourceFactory
         ).flow
     }
 

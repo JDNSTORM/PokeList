@@ -15,7 +15,7 @@ class PokeListMediator(
     private val clearTable: suspend () -> Unit
 ): RemoteMediator<Int, Pokemon>() {
 
-    override suspend fun initialize(): InitializeAction = InitializeAction.LAUNCH_INITIAL_REFRESH
+    override suspend fun initialize(): InitializeAction = InitializeAction.SKIP_INITIAL_REFRESH
 
     override suspend fun load(
         loadType: LoadType,
@@ -39,9 +39,10 @@ class PokeListMediator(
             }
             LoadType.APPEND -> { /** Returns the Default Offset on the assumption that Initial Refresh is Skipped */
                 getLastOffset(state)?.plus(pageSize)
-                    ?:
-                    return MediatorResult.Success(false)
-//                    PokeAPIModule.DEFAULT_OFFSET
+                    ?: when(initialize()){
+                        InitializeAction.LAUNCH_INITIAL_REFRESH -> return MediatorResult.Success(false)
+                        InitializeAction.SKIP_INITIAL_REFRESH -> PokeAPIModule.DEFAULT_OFFSET
+                    }
             }
         }
         Log.d("Offset", offset.toString())
