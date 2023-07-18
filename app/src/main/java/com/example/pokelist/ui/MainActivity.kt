@@ -2,6 +2,7 @@ package com.example.pokelist.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -83,14 +84,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun SectionPokeListBinding.monitorListState(state: CombinedLoadStates){
+        state.track()
         val isListEmpty = state.source.refresh is LoadState.NotLoading
-                && state.append is LoadState.NotLoading
-                && pokemonList.adapter?.itemCount == 0
-        val isLoading = (state.refresh is LoadState.Loading
-                || state.append is LoadState.Loading)
-                && pokemonList.adapter?.itemCount == 0
+            && state.append is LoadState.NotLoading
+            && pokemonList.adapter?.itemCount == 0
+        val isLoading = (
+                state.refresh is LoadState.Loading
+                || state.prepend is LoadState.Loading
+                || state.append is LoadState.Loading
+                || state.source.refresh is LoadState.Loading
+            ) && pokemonList.adapter?.itemCount == 0
         val isError = state.refresh is LoadState.Error
-                && pokemonList.adapter?.itemCount == 0
+            && pokemonList.adapter?.itemCount == 0
+        Log.d("isLoading", isLoading.toString())
+        Log.d("itemCount", pokemonList.adapter?.itemCount.toString())
         listEmpty.isVisible = isListEmpty && !isError && !isLoading
         pokemonList.isVisible = !isListEmpty && !isLoading && !isError
         progressBar.isVisible = isLoading
@@ -103,5 +110,17 @@ class MainActivity : AppCompatActivity() {
         errorState?.let {
             errorMessage.text = it.error.localizedMessage
         }
+    }
+
+    private fun CombinedLoadStates.track(){
+        Log.d("Prepend", prepend.toString())
+        Log.d("Refresh", refresh.toString())
+        Log.d("Append", append.toString())
+        Log.d("SourcePrepend", source.prepend.toString())
+        Log.d("SourceRefresh", source.refresh.toString())
+        Log.d("SourceAppend", source.append.toString())
+        Log.d("MediatorPrepend", mediator?.prepend.toString())
+        Log.d("MediatorRefresh", mediator?.refresh.toString())
+        Log.d("MediatorAppend", mediator?.append.toString())
     }
 }

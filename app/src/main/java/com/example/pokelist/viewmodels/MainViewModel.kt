@@ -27,4 +27,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    init {
+        viewModelScope.launch {
+            repository.local.clearPokeList()
+        }
+    }
 }
