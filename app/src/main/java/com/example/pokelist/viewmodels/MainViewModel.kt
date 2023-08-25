@@ -16,7 +16,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val repository: PokeAPIRepository
 ): ViewModel() {
-    val pokeListPagingData = repository.getPokeListStream().cachedIn(viewModelScope)
+    val pokeListPagingData = repository.getPokeListStream()
+//        .cachedIn(viewModelScope)
     private val _viewedPokemon: MutableStateFlow<InfoState> = MutableStateFlow(InfoState.Initial)
     val viewedState: StateFlow<InfoState> = _viewedPokemon.asStateFlow()
     val getInfo: (Int) -> Unit = { id ->

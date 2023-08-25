@@ -81,6 +81,9 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             pagingAdapter.loadStateFlow.collectLatest{monitorListState(it)}
         }
+        root.setOnRefreshListener {
+            pagingAdapter.refresh()
+        }
     }
 
     private fun SectionPokeListBinding.monitorListState(state: CombinedLoadStates){
@@ -102,13 +105,14 @@ class MainActivity : AppCompatActivity() {
         pokemonList.isVisible = !isListEmpty && !isLoading && !isError
         progressBar.isVisible = isLoading
         layoutRetry.isVisible = isError
-
+        root.isRefreshing = isLoading
         val errorState = state.refresh as? LoadState.Error
 //            ?: state.source.prepend as? LoadState.Error
 //            ?: state.append as? LoadState.Error
 //            ?: state.prepend as? LoadState.Error
         errorState?.let {
             errorMessage.text = it.error.localizedMessage
+            pokemonList.scrollToPosition(0)
         }
     }
 

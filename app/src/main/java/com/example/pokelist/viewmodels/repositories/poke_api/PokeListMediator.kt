@@ -25,8 +25,8 @@ class PokeListMediator(
         val pageSize = state.config.pageSize
         val offset = when(loadType){
             LoadType.REFRESH -> {
-                clearTable.invoke()
-                getCurrentOffset(state) ?: PokeAPIModule.DEFAULT_OFFSET
+//                getCurrentOffset(state) ?:
+                PokeAPIModule.DEFAULT_OFFSET
             }
             LoadType.PREPEND -> {
                 getFirstOffset(state)?.let {
@@ -49,6 +49,7 @@ class PokeListMediator(
 
         return try {
             val pokeList = loadList(offset, pageSize)
+            if (loadType == LoadType.REFRESH) clearTable()
             storeList(pokeList)
             MediatorResult.Success(pokeList.isEmpty())
         }catch (e: Exception){

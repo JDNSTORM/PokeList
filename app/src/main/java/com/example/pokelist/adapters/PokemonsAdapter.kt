@@ -30,7 +30,7 @@ class PokemonsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.binding as ItemPokemonNameBinding
-        val pokemon = getItem(position)!!
+        val pokemon = getItem(position) ?: return
         binding.bind(pokemon)
     }
 
