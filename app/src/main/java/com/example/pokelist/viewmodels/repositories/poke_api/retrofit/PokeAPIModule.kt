@@ -12,8 +12,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
+//@Module
+//@InstallIn(SingletonComponent::class)
 object PokeAPIModule {
     private const val BASE_URL = "https://pokeapi.co/api/v2/"
     const val QUERY_OFFSET = "offset"
@@ -22,8 +22,8 @@ object PokeAPIModule {
     const val DEFAULT_LIMIT = 20
     const val PATH_POKEMON_ID = "pokemonId"
 
-    @Singleton
-    @Provides
+//    @Singleton
+//    @Provides
     fun providePokemonService(): PokemonService {
         val gson = GsonBuilder().setLenient().create()
         val interceptor = HttpLoggingInterceptor()
