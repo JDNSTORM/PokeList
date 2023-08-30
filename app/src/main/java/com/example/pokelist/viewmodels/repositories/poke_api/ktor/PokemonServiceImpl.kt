@@ -25,7 +25,7 @@ class PokemonServiceImpl(
         return client.get(BASE_URL){
             url {
                 appendPathSegments(PATH_POKEMON_ID)
-                queries.forEach { query, value ->
+                queries.forEach { (query, value) ->
                     parameters.append(query, "$value")
                 }
             }
@@ -42,7 +42,7 @@ class PokemonServiceImpl(
     }
 
     companion object{
-        private const val BASE_URL = "https://pokeapi.co/api/v2"
+        private const val BASE_URL = "https://pokeapi.co/api/v2/"
         private const val PATH_POKEMON_ID = "pokemon"
         private const val QUERY_OFFSET = "offset"
         private const val QUERY_LIMIT = "limit"
