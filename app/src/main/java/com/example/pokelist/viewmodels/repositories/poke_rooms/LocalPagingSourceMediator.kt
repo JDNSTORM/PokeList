@@ -6,7 +6,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.paging.util.getClippedRefreshKey
-import com.example.pokelist.viewmodels.repositories.poke_api.PokeAPIModule
+import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
 
 @Deprecated("Paging doesn't behave as intended so this Mediator is ineffective")

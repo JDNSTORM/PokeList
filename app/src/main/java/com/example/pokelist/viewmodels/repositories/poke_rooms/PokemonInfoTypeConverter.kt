@@ -7,7 +7,7 @@ import com.example.pokelist.viewmodels.repositories.poke_api.entities.MoveInfo
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Moves
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ph.projects.navor_jamesdave.apis.versions.with_gson.pokeapi_entities.Sprites
+import com.example.pokelist.viewmodels.repositories.poke_api.entities.Sprites
 
 class PokemonInfoTypeConverter {
     val gson = Gson()
@@ -84,7 +84,7 @@ class PokemonInfoTypeConverter {
     }
 
     @TypeConverter
-    fun stringToSprites(data: String): Sprites{
+    fun stringToSprites(data: String): Sprites {
         val type = object: TypeToken<Sprites>(){}.type
         return gson.fromJson(data, type)
     }

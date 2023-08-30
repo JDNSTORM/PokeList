@@ -1,5 +1,6 @@
-package com.example.pokelist.viewmodels.repositories.poke_api
+package com.example.pokelist.viewmodels.repositories.poke_api.retrofit
 
+import com.example.pokelist.viewmodels.repositories.poke_api.PokemonService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides

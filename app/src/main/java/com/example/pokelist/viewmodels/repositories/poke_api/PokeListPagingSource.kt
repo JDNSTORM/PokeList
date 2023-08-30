@@ -3,6 +3,7 @@ package com.example.pokelist.viewmodels.repositories.poke_api
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
+import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 import retrofit2.HttpException
 import java.io.IOException
 

@@ -1,9 +1,9 @@
-package ph.projects.navor_jamesdave.apis.versions.with_gson.pokeapi_entities
+package com.example.pokelist.viewmodels.repositories.poke_api.entities
 
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Sprites(

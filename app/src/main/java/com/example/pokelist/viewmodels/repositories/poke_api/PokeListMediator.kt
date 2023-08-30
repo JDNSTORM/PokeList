@@ -7,6 +7,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.paging.util.getClippedRefreshKey
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
+import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 
 @OptIn(ExperimentalPagingApi::class)
 class PokeListMediator(

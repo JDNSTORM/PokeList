@@ -6,8 +6,8 @@ import androidx.paging.PagingData
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonResult
+import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(private val service: PokemonService) {

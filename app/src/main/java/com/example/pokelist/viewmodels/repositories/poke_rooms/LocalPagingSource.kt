@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.room.paging.util.getClippedRefreshKey
-import com.example.pokelist.viewmodels.repositories.poke_api.PokeAPIModule
+import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
 
 class LocalPagingSource(

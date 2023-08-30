@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import ph.projects.navor_jamesdave.apis.versions.with_gson.pokeapi_entities.Sprites
+import com.example.pokelist.viewmodels.repositories.poke_api.entities.Sprites
 
 @AndroidEntryPoint
 class PokemonSpritesFragment : BaseFragment<FragmentPokemonSpritesBinding>() {
