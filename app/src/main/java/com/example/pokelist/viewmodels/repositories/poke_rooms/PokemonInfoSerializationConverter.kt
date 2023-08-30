@@ -53,6 +53,6 @@ class PokemonInfoSerializationConverter {
     @TypeConverter
     fun stringToSprites(data: String): Sprites = data.decode()
 
-    private fun Any.encode(): String = Json.encodeToString(this)
+    private inline fun <reified T: Any> T.encode(): String = Json.encodeToString(this)
     private inline fun <reified T: Any> String.decode(): T = Json.decodeFromString(this)
 }

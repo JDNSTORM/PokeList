@@ -9,6 +9,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,13 +21,21 @@ class MainViewModel @Inject constructor(
     val pokeListPagingData = repository.getPokeListStream()
 //        .cachedIn(viewModelScope)
     private val _viewedPokemon: MutableStateFlow<InfoState> = MutableStateFlow(InfoState.Initial)
+    private val viewedInfoState = MutableStateFlow<Int?>(null)
+    init {
+        viewModelScope.launch {
+            viewedInfoState.collect{ id ->
+                id?.let {
+                    _viewedPokemon.emit(InfoState.Loading)
+                    val state = repository.getInfoAsInfoState(id)
+                    _viewedPokemon.emit(state)
+                }
+            }
+        }
+    }
     val viewedState: StateFlow<InfoState> = _viewedPokemon.asStateFlow()
     val getInfo: (Int) -> Unit = { id ->
-        viewModelScope.launch {
-            _viewedPokemon.emit(InfoState.Loading)
-            val state = repository.getInfoAsInfoState(id)
-            _viewedPokemon.emit(state)
-        }
+        viewedInfoState.update { id }
     }
 
     init {
