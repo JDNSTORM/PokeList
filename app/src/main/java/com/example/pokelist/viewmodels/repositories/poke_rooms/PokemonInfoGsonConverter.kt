@@ -8,8 +8,9 @@ import com.example.pokelist.viewmodels.repositories.poke_api.entities.Moves
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Sprites
+import kotlinx.serialization.json.Json
 
-class PokemonInfoTypeConverter {
+class PokemonInfoGsonConverter {
     val gson = Gson()
 
     @TypeConverter

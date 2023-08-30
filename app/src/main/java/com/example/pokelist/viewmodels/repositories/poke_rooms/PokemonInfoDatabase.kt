@@ -7,7 +7,7 @@ import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
 
 @Database(entities = [PokemonInfo::class, Pokemon::class], version = 2, exportSchema = false)
-@TypeConverters(PokemonInfoTypeConverter::class)
+@TypeConverters(PokemonInfoSerializationConverter::class)
 abstract class PokemonInfoDatabase(): RoomDatabase() {
     abstract fun pokemonInfoDAO(): PokemonInfoDAO
     abstract fun pokeListDAO(): PokeListDAO
