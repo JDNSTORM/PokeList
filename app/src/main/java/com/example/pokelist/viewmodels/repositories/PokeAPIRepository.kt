@@ -6,18 +6,15 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.pokelist.ui.models.InfoState
-import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 import com.example.pokelist.viewmodels.repositories.poke_api.PokeListMediator
 import com.example.pokelist.viewmodels.repositories.poke_api.RemoteDataSource
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
+import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalDataSource
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSource
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-@ViewModelScoped
-class PokeAPIRepository @Inject constructor(
+class PokeAPIRepository(
     val remote: RemoteDataSource,
     val local: LocalDataSource
 ) {

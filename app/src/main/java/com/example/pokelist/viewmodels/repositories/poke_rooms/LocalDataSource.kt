@@ -3,9 +3,8 @@ package com.example.pokelist.viewmodels.repositories.poke_rooms
 import androidx.paging.PagingSource
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
-import javax.inject.Inject
 
-class LocalDataSource @Inject constructor(
+class LocalDataSource(
     private val infoDAO: PokemonInfoDAO,
     private val listDAO: PokeListDAO
 ) {

@@ -8,9 +8,8 @@ import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInf
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonResult
 import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor(private val service: PokemonService) {
+class RemoteDataSource(private val service: PokemonService) {
     suspend fun getList(offset: Int, limit: Int): PokemonResult{
         return service.getList(offset, limit)
     }
