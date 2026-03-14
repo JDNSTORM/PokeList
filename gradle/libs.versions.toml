@@ -1,7 +1,7 @@
 [versions]
 androidGradle = "8.13.2"
-kotlin = "1.9.10"
-ksp = "1.9.10-1.0.13"
+kotlin = "2.1.10"
+ksp = "2.1.10-1.0.31"
 activityKtx = "1.7.2"
 appcompat = "1.6.1"
 constraintlayout = "2.1.4"
@@ -9,8 +9,7 @@ coreKtx = "1.10.1"
 espressoCore = "3.5.1"
 glide = "4.16.0"
 gson = "2. 10.1"
-hilt = "2.47"
-hiltAndroidPlugin = "2.46.1"
+hilt = "2.56"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 kotlinxSerializationJson = "1.6.0"
@@ -54,7 +53,7 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "androidGradle" }
 androidLibrary = { id = "com.android.library", version.ref = "androidGradle" }
-hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroidPlugin" }
+hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinPluginSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlinParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
