@@ -1,42 +1,42 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
-    id("com.google.devtools.ksp")
-    id("org.jetbrains.kotlin.plugin.serialization")
-    id("org.jetbrains.kotlin.plugin.parcelize")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    kotlin("kapt")
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlinPluginSerialization)
+    alias(libs.plugins.kotlinParcelize)
 }
 
 android {
-    namespace 'com.example.pokelist'
-    compileSdk 33
+    namespace = "com.example.pokelist"
+    compileSdk = 33
 
     defaultConfig {
-        applicationId "com.example.pokelist"
-        minSdk 24
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        applicationId = "com.example.pokelist"
+        minSdk = 24
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = "17"
     }
-    buildFeatures{
-        viewBinding true
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -66,9 +66,8 @@ dependencies {
     implementation(libs.ktor.client.android)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.kotlinx.serialization.json)
-//    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.10")
 
-    testImplementation (libs.junit)
-    androidTestImplementation (libs.androidx.junit)
-    androidTestImplementation (libs.androidx.espresso.core)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
