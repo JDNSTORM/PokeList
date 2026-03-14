@@ -1,9 +1,7 @@
 package com.example.pokelist.ui
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -12,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
-import androidx.viewpager2.widget.ViewPager2
 import com.example.pokelist.adapters.FragmentsAdapter
 import com.example.pokelist.adapters.PokemonsAdapter
 import com.example.pokelist.adapters.PokemonsLoadStateAdapter
@@ -23,12 +20,11 @@ import com.example.pokelist.ui.fragments.PokemonSpritesFragment
 import com.example.pokelist.viewmodels.MainViewModel
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
 import com.google.android.material.tabs.TabLayoutMediator
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewModel: MainViewModel by viewModels()
+        val viewModel: MainViewModel by viewModel()
         binding.setupUI(
             viewModel.pokeListPagingData,
             viewModel.getInfo

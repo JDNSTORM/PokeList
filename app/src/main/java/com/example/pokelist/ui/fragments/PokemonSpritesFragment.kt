@@ -16,13 +16,11 @@ import com.example.pokelist.R
 import com.example.pokelist.databinding.FragmentPokemonSpritesBinding
 import com.example.pokelist.ui.models.InfoState
 import com.example.pokelist.viewmodels.MainViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.pokelist.viewmodels.repositories.poke_api.entities.Sprites
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.Sprites
 
-@AndroidEntryPoint
 class PokemonSpritesFragment : BaseFragment<FragmentPokemonSpritesBinding>() {
     override fun inflateView(
         inflater: LayoutInflater,

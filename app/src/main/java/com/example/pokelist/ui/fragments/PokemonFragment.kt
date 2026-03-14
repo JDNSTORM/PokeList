@@ -1,7 +1,6 @@
 package com.example.pokelist.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +9,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.example.pokelist.R
 import com.example.pokelist.databinding.FragmentPokemonBinding
 import com.example.pokelist.ui.models.InfoState
 import com.example.pokelist.viewmodels.MainViewModel
 import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class PokemonFragment : BaseFragment<FragmentPokemonBinding>() {
     override fun inflateView(
         inflater: LayoutInflater,
