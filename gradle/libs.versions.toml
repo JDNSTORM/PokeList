@@ -1,6 +1,8 @@
 [versions]
-androidGradle = "8.13.2"
+androidGradle = "9.1.0"
+androidTools = "32.1.0" # Must match androidGradle
 kotlin = "2.3.10"
+composeMultiplatform = "1.10.2"
 ksp = "2.3.6"
 activityKtx = "1.13.0"
 appcompat = "1.7.1"
@@ -22,6 +24,17 @@ room = "2.8.4"
 swiperefreshlayout = "1.2.0"
 
 [libraries]
+# Gradle
+androidToolsBuildGradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradle" }
+androidToolsCommon = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+composeCompilerGradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+kspGradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+cmpGradlePlugin = { module = "org.jetbrains.compose:org.jetbrains.compose.gradle.plugin", version.ref = "composeMultiplatform" }
+kmpGradlePlugin = { module = "org.jetbrains.kotlin.multiplatform:org.jetbrains.kotlin.multiplatform.gradle.plugin", version.ref = "kotlin" }
+androidKmpLibraryGradlePlugin = { module = "com.android.kotlin.multiplatform.library:com.android.kotlin.multiplatform.library.gradle.plugin", version.ref = "androidGradle" }
+# Gradle ##
+
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
@@ -55,7 +68,6 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "androidGradle" }
 androidLibrary = { id = "com.android.library", version.ref = "androidGradle" }
-kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinPluginSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlinParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
