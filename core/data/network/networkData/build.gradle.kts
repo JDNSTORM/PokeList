@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.androidLint)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlinPluginSerialization)
-    alias(libs.plugins.kotlinParcelize)
 }
 
 kotlin {
