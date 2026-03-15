@@ -2,6 +2,15 @@
 androidGradle = "9.1.0"
 androidTools = "32.1.0" # Must match androidGradle
 kotlin = "2.3.10"
+# Used in buildLogic
+#noinspection UnusedVersionCatalogEntry
+android-compileSdk = "36"
+#noinspection UnusedVersionCatalogEntry
+android-targetSdk = "36"
+#noinspection UnusedVersionCatalogEntry
+android-minSdk = "24"
+#noinspection UnusedVersionCatalogEntry
+jvmToolchain = "17"
 composeMultiplatform = "1.10.2"
 ksp = "2.3.6"
 activityKtx = "1.13.0"
