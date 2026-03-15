@@ -12,5 +12,6 @@ interface PokemonService {
 
     companion object {
         const val DEFAULT_OFFSET = 0
+        const val BASE_URL = "https://pokeapi.co/api/v2/"
     }
 }

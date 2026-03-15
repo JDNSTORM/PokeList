@@ -12,9 +12,8 @@ internal class PokemonServiceImpl(
     private val client: HttpClient
 ): PokemonService {
     override suspend fun getList(offset: Int, limit: Int): PokemonResult {
-        return client.get(BASE_URL){
+        return client.get(PATH_POKEMON_ID){
             url {
-                appendPathSegments(PATH_POKEMON_ID)
                 parameters.append(QUERY_OFFSET, "$offset")
                 parameters.append(QUERY_LIMIT, "$limit")
             }
@@ -22,9 +21,8 @@ internal class PokemonServiceImpl(
     }
 
     override suspend fun getList(queries: Map<String, Int>): PokemonResult {
-        return client.get(BASE_URL){
+        return client.get(PATH_POKEMON_ID){
             url {
-                appendPathSegments(PATH_POKEMON_ID)
                 queries.forEach { (query, value) ->
                     parameters.append(query, "$value")
                 }
@@ -33,9 +31,8 @@ internal class PokemonServiceImpl(
     }
 
     override suspend fun getPokemonInfo(pokemonId: Int): PokemonInfo {
-        return client.get(BASE_URL){
+        return client.get(PATH_POKEMON_ID){
             url {
-                appendPathSegments(PATH_POKEMON_ID)
                 appendPathSegments("$pokemonId")
             }
         }.body()
