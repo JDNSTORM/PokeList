@@ -35,5 +35,9 @@ gradlePlugin {
             id = "project.base"
             implementationClass = "BaseConventionPlugin"
         }
+        register("kmp"){
+            id = "project.kmp"
+            implementationClass = "KmpConventionPlugin"
+        }
     }
 }
