@@ -21,6 +21,7 @@ kotlin {
         commonMain {
             dependencies {
                 api(projects.core.data.network.networkData)
+                implementation(libs.androidx.paging.common.ktx)
             }
         }
 

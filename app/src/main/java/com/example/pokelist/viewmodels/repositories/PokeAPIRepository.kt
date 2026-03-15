@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.pokelist.ui.models.InfoState
-import com.example.pokelist.viewmodels.repositories.poke_api.PokeListMediator
+import com.navorjames.pokelist.core.data.network.PokeListMediator
 import com.example.pokelist.viewmodels.repositories.poke_api.RemoteDataSource
 import com.navorjames.pokelist.core.data.network.data.Pokemon
 import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
@@ -41,19 +41,10 @@ class PokeAPIRepository(
             { list: List<Pokemon> -> local.insertList(list) }
         ) }
 
-//        val localMediator = LocalPagingSourceMediator(
-//            { offset: Int, limit: Int -> remote.getListDirectly(offset, limit) },
-//            { list: List<Pokemon> -> local.insertList(list) },
-//            { local.clearPokeList() },
-//            { localPagingSourceFactory.invalidatePagingSource() }
-//        )
-
         return Pager(
             pagingConfig,
             initialKey,
-//            localMediator,
             remoteMediator,
-//            pagingSourceFactory =  localPagingSourceFactory
             pagingSourceFactory
         ).flow
     }

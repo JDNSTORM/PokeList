@@ -7,6 +7,8 @@ import com.navorjames.pokelist.core.data.network.data.Pokemon
 import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 import com.navorjames.pokelist.core.data.network.data.PokemonResult
 import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
+import com.navorjames.pokelist.core.data.network.PokeListPagingSource
+import com.navorjames.pokelist.core.data.network.PokemonService
 import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSource(private val service: PokemonService) {
@@ -32,7 +34,7 @@ class RemoteDataSource(private val service: PokemonService) {
             ),
             PokeAPIModule.DEFAULT_OFFSET,
             pagingSourceFactory = {
-                PokeListPagingSource{ offset: Int, limit: Int ->
+                PokeListPagingSource { offset: Int, limit: Int ->
                     service.getList(offset, limit).pokemonList
                 }
             }

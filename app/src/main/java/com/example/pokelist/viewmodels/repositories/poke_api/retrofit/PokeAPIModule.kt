@@ -1,11 +1,7 @@
 package com.example.pokelist.viewmodels.repositories.poke_api.retrofit
 
-import com.example.pokelist.viewmodels.repositories.poke_api.PokemonService
-import com.google.gson.GsonBuilder
-import io.ktor.http.ContentType
-import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
+import com.navorjames.pokelist.core.data.network.PokemonService
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,7 +13,7 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 object PokeAPIModule {
     private const val BASE_URL = "https://pokeapi.co/api/v2/"
     const val QUERY_OFFSET = "offset"
-    const val DEFAULT_OFFSET = 0
+    const val DEFAULT_OFFSET = PokemonService.DEFAULT_OFFSET
     const val QUERY_LIMIT = "limit"
     const val DEFAULT_LIMIT = 20
     const val PATH_POKEMON_ID = "pokemonId"

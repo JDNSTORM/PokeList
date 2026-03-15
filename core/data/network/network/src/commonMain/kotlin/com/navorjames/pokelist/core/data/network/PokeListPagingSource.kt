@@ -1,11 +1,8 @@
-package com.example.pokelist.viewmodels.repositories.poke_api
+package com.navorjames.pokelist.core.data.network
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.navorjames.pokelist.core.data.network.data.Pokemon
-import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
-import retrofit2.HttpException
-import java.io.IOException
 
 class PokeListPagingSource(
     private val getList: suspend (Int, Int) -> List<Pokemon>
@@ -18,10 +15,16 @@ class PokeListPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
-        val position = params.key?.takeIf { it > PokeAPIModule.DEFAULT_OFFSET } ?: PokeAPIModule.DEFAULT_OFFSET
+        val position = params.key
+            ?.takeIf {
+                it > PokemonService.DEFAULT_OFFSET
+            }
+            ?: PokemonService.DEFAULT_OFFSET
         try {
             val pokeList = getList(position, params.loadSize)
-            val prevKey = params.key?.minus(params.loadSize)?.takeIf { it > PokeAPIModule.DEFAULT_OFFSET }
+            val prevKey = params.key
+                ?.minus(params.loadSize)
+                ?.takeIf { it > PokemonService.DEFAULT_OFFSET }
             val nextKey = if (pokeList.isEmpty()){
                 null
             }else{
@@ -32,9 +35,8 @@ class PokeListPagingSource(
                 prevKey,
                 nextKey
             )
-        }catch (e: IOException){
-            return LoadResult.Error(e)
-        }catch (e: HttpException){
+        }
+        catch (e: Throwable) {
             return LoadResult.Error(e)
         }
     }

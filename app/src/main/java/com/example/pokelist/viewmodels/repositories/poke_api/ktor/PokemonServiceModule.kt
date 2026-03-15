@@ -1,6 +1,6 @@
 package com.example.pokelist.viewmodels.repositories.poke_api.ktor
 
-import com.example.pokelist.viewmodels.repositories.poke_api.PokemonService
+import com.navorjames.pokelist.core.data.network.PokemonService
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
