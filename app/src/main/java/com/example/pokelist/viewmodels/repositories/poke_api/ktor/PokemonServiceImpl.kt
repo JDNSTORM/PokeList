@@ -11,11 +11,11 @@ import io.ktor.http.appendPathSegments
 class PokemonServiceImpl(
     private val client: HttpClient
 ): PokemonService {
-    override suspend fun getList(startInt: Int, limit: Int): PokemonResult {
+    override suspend fun getList(offset: Int, limit: Int): PokemonResult {
         return client.get(BASE_URL){
             url {
                 appendPathSegments(PATH_POKEMON_ID)
-                parameters.append(QUERY_OFFSET, "$startInt")
+                parameters.append(QUERY_OFFSET, "$offset")
                 parameters.append(QUERY_LIMIT, "$limit")
             }
         }.body()

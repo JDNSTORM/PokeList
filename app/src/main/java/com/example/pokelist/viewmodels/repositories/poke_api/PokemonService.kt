@@ -1,27 +1,12 @@
 package com.example.pokelist.viewmodels.repositories.poke_api
 
-import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule.PATH_POKEMON_ID
 import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 import com.navorjames.pokelist.core.data.network.data.PokemonResult
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 interface PokemonService {
-    @GET("pokemon/")
-    suspend fun getList(
-        @Query("offset") startInt: Int,
-        @Query("limit") limit: Int
-    ): PokemonResult
+    suspend fun getList(offset: Int, limit: Int): PokemonResult
 
-    @GET("pokemon/")
-    suspend fun getList(
-        @QueryMap queries: Map<String, Int>
-    ): PokemonResult
+    suspend fun getList(queries: Map<String, Int>): PokemonResult
 
-    @GET("pokemon/{pokemonId}")
-    suspend fun getPokemonInfo(
-        @Path(PATH_POKEMON_ID) pokemonId: Int
-    ): PokemonInfo
+    suspend fun getPokemonInfo(pokemonId: Int): PokemonInfo
 }

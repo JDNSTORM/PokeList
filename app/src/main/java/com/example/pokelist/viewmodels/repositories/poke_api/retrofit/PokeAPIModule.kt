@@ -49,6 +49,6 @@ object PokeAPIModule {
             )
             .build()
 
-        return retrofit.create(PokemonService::class.java)
+        return retrofit.create(PokemonServiceImpl::class.java)
     }
 }
