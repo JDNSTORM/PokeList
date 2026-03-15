@@ -1,4 +1,4 @@
-package com.example.pokelist.viewmodels.repositories.poke_api
+package com.navorjames.pokelist.core.data.network
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -6,9 +6,6 @@ import androidx.paging.PagingData
 import com.navorjames.pokelist.core.data.network.data.Pokemon
 import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 import com.navorjames.pokelist.core.data.network.data.PokemonResult
-import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
-import com.navorjames.pokelist.core.data.network.PokeListPagingSource
-import com.navorjames.pokelist.core.data.network.PokemonService
 import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSource(private val service: PokemonService) {
@@ -29,10 +26,10 @@ class RemoteDataSource(private val service: PokemonService) {
     fun getPokeListStream(): Flow<PagingData<Pokemon>> {
         return Pager(
             PagingConfig(
-                PokeAPIModule.DEFAULT_LIMIT,
+                PokemonService.DEFAULT_LIMIT,
                 enablePlaceholders = false
             ),
-            PokeAPIModule.DEFAULT_OFFSET,
+            PokemonService.DEFAULT_OFFSET,
             pagingSourceFactory = {
                 PokeListPagingSource { offset: Int, limit: Int ->
                     service.getList(offset, limit).pokemonList
