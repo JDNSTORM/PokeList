@@ -1,9 +1,7 @@
 package com.navorjames.pokelist.core.data.network.data
 
-
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,10 +10,8 @@ import kotlinx.serialization.Serializable
 data class Pokemon(
     @PrimaryKey(true)
     val dbIndex: Long = 0,
-    @SerializedName("name")
     @SerialName("name")
     val name: String = "",
-    @SerializedName("url")
     @SerialName("url")
     val url: String = ""
 ){

@@ -36,7 +36,7 @@ kotlin {
 
         androidMain {
             dependencies {
-                implementation(libs.gson)
+
             }
         }
 
