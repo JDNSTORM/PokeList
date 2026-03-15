@@ -13,4 +13,7 @@ plugins {
     alias(libs.plugins.kotlinPluginSerialization) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kotlinParcelize) apply false
+    alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
+    alias(libs.plugins.androidLint) apply false
 }
