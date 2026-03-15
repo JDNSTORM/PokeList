@@ -8,7 +8,7 @@ import androidx.paging.PagingData
 import com.example.pokelist.ui.models.InfoState
 import com.example.pokelist.viewmodels.repositories.poke_api.PokeListMediator
 import com.example.pokelist.viewmodels.repositories.poke_api.RemoteDataSource
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
+import com.navorjames.pokelist.core.data.network.data.Pokemon
 import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalDataSource
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSource

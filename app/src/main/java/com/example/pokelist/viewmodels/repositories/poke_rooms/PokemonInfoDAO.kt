@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.Companion.REPLACE
 import androidx.room.Query
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
+import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 import com.example.pokelist.viewmodels.repositories.poke_rooms.PokemonInfoDatabase.Companion.POKEMON_INFO_TABLE
 
 @Dao

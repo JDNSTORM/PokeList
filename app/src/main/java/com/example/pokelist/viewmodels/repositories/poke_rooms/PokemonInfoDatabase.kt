@@ -3,8 +3,8 @@ package com.example.pokelist.viewmodels.repositories.poke_rooms
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
+import com.navorjames.pokelist.core.data.network.data.Pokemon
+import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 
 @Database(entities = [PokemonInfo::class, Pokemon::class], version = 2, exportSchema = false)
 @TypeConverters(PokemonInfoSerializationConverter::class)
@@ -14,7 +14,7 @@ abstract class PokemonInfoDatabase(): RoomDatabase() {
 
     companion object{
         const val DB_NAME = "pokemon-database"
-        const val POKEMON_INFO_TABLE = "pokemon-info"
-        const val POKELIST_TABLE = "pokemon-list"
+        const val POKEMON_INFO_TABLE = PokemonInfo.TABLE_NAME
+        const val POKELIST_TABLE = Pokemon.TABLE_NAME
     }
 }

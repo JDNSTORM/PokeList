@@ -1,8 +1,8 @@
 package com.example.pokelist.viewmodels.repositories.poke_rooms
 
 import androidx.paging.PagingSource
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
+import com.navorjames.pokelist.core.data.network.data.Pokemon
+import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 
 class LocalDataSource(
     private val infoDAO: PokemonInfoDAO,

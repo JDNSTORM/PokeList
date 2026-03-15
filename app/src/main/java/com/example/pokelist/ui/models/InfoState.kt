@@ -1,6 +1,6 @@
 package com.example.pokelist.ui.models
 
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
+import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 
 sealed interface InfoState{
     object Initial : InfoState

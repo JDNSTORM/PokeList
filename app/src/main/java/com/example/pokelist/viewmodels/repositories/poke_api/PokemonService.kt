@@ -1,8 +1,8 @@
 package com.example.pokelist.viewmodels.repositories.poke_api
 
 import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule.PATH_POKEMON_ID
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonResult
+import com.navorjames.pokelist.core.data.network.data.PokemonInfo
+import com.navorjames.pokelist.core.data.network.data.PokemonResult
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

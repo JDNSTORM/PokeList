@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.pokelist.databinding.FragmentPokemonBinding
 import com.example.pokelist.ui.models.InfoState
 import com.example.pokelist.viewmodels.MainViewModel
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
+import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch

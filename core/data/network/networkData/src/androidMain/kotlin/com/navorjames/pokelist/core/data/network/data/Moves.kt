@@ -1,7 +1,6 @@
-package com.example.pokelist.viewmodels.repositories.poke_api.entities
+package com.navorjames.pokelist.core.data.network.data
 
 
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.MoveInfo
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

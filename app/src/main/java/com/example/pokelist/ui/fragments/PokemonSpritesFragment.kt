@@ -16,7 +16,7 @@ import com.example.pokelist.R
 import com.example.pokelist.databinding.FragmentPokemonSpritesBinding
 import com.example.pokelist.ui.models.InfoState
 import com.example.pokelist.viewmodels.MainViewModel
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.Sprites
+import com.navorjames.pokelist.core.data.network.data.Sprites
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch

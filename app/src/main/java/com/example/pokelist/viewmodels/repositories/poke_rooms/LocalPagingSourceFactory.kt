@@ -2,7 +2,7 @@ package com.example.pokelist.viewmodels.repositories.poke_rooms
 
 import android.util.Log
 import androidx.paging.PagingSource
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
+import com.navorjames.pokelist.core.data.network.data.Pokemon
 
 @Deprecated("Paging doesn't behave as intended so this Factory is ineffective")
 class LocalPagingSourceFactory(

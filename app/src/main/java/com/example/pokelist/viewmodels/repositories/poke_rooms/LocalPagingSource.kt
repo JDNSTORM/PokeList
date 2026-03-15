@@ -5,7 +5,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.room.paging.util.getClippedRefreshKey
 import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
+import com.navorjames.pokelist.core.data.network.data.Pokemon
 
 class LocalPagingSource(
     private val getListLocally: suspend (Int, Int) -> List<Pokemon>,

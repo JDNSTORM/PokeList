@@ -18,7 +18,7 @@ import com.example.pokelist.databinding.SectionPokeListBinding
 import com.example.pokelist.ui.fragments.PokemonFragment
 import com.example.pokelist.ui.fragments.PokemonSpritesFragment
 import com.example.pokelist.viewmodels.MainViewModel
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
+import com.navorjames.pokelist.core.data.network.data.Pokemon
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest

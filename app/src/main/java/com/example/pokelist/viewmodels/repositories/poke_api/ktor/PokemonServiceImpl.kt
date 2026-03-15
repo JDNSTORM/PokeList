@@ -1,8 +1,8 @@
 package com.example.pokelist.viewmodels.repositories.poke_api.ktor
 
 import com.example.pokelist.viewmodels.repositories.poke_api.PokemonService
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonResult
+import com.navorjames.pokelist.core.data.network.data.PokemonInfo
+import com.navorjames.pokelist.core.data.network.data.PokemonResult
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

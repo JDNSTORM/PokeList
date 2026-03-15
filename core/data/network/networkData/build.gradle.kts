@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.projectKmpAndroidLibrary)
     alias(libs.plugins.androidLint)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlinPluginSerialization)
+    alias(libs.plugins.kotlinParcelize)
 }
 
 kotlin {
@@ -20,7 +23,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.androidx.room.common)
             }
         }
 
@@ -32,7 +36,7 @@ kotlin {
 
         androidMain {
             dependencies {
-
+                implementation(libs.gson)
             }
         }
 
@@ -44,5 +48,4 @@ kotlin {
             }
         }
     }
-
 }

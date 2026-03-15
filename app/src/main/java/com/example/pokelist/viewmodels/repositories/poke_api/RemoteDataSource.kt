@@ -3,9 +3,9 @@ package com.example.pokelist.viewmodels.repositories.poke_api
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.Pokemon
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonInfo
-import com.example.pokelist.viewmodels.repositories.poke_api.entities.PokemonResult
+import com.navorjames.pokelist.core.data.network.data.Pokemon
+import com.navorjames.pokelist.core.data.network.data.PokemonInfo
+import com.navorjames.pokelist.core.data.network.data.PokemonResult
 import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 import kotlinx.coroutines.flow.Flow
 

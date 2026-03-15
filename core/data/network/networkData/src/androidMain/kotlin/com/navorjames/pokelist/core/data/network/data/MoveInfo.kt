@@ -1,4 +1,4 @@
-package com.example.pokelist.viewmodels.repositories.poke_api.entities
+package com.navorjames.pokelist.core.data.network.data
 
 
 import com.google.gson.annotations.SerializedName
@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AbilityInfo(
+data class MoveInfo(
     @SerializedName("name")
     @SerialName("name")
     val name: String = "",

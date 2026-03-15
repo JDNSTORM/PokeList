@@ -1,15 +1,14 @@
-package com.example.pokelist.viewmodels.repositories.poke_api.entities
+package com.navorjames.pokelist.core.data.network.data
 
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.pokelist.viewmodels.repositories.poke_rooms.PokemonInfoDatabase.Companion.POKEMON_INFO_TABLE
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Entity(tableName = POKEMON_INFO_TABLE)
+@Entity(tableName = PokemonInfo.TABLE_NAME)
 data class PokemonInfo(
     @SerializedName("abilities")
     @SerialName("abilities")
@@ -33,4 +32,8 @@ data class PokemonInfo(
     @SerializedName("sprites")
     @SerialName("sprites")
     val sprites: Sprites = Sprites(),
-)
+) {
+    companion object {
+        const val TABLE_NAME = "pokemon-info"
+    }
+}

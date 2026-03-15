@@ -1,4 +1,4 @@
-package com.example.pokelist.viewmodels.repositories.poke_api.entities
+package com.navorjames.pokelist.core.data.network.data
 
 
 import android.os.Parcelable

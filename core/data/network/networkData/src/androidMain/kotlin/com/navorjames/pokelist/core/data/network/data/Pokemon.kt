@@ -1,15 +1,14 @@
-package com.example.pokelist.viewmodels.repositories.poke_api.entities
+package com.navorjames.pokelist.core.data.network.data
 
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.pokelist.viewmodels.repositories.poke_rooms.PokemonInfoDatabase.Companion.POKELIST_TABLE
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Entity(tableName = POKELIST_TABLE)
+@Entity(tableName = Pokemon.TABLE_NAME)
 data class Pokemon(
     @PrimaryKey(true)
     val dbIndex: Long = 0,
@@ -26,4 +25,8 @@ data class Pokemon(
     }
 
     constructor(name: String, url: String): this(0, name, url)
+
+    companion object {
+        const val TABLE_NAME = "pokemon-list"
+    }
 }
