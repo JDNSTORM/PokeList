@@ -1,4 +1,4 @@
-package com.example.pokelist.viewmodels.repositories.poke_api.ktor
+package com.navorjames.pokelist.core.data.network.ktor
 
 import com.navorjames.pokelist.core.data.network.PokemonService
 import com.navorjames.pokelist.core.data.network.data.PokemonInfo
@@ -8,7 +8,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.http.appendPathSegments
 
-class PokemonServiceImpl(
+internal class PokemonServiceImpl(
     private val client: HttpClient
 ): PokemonService {
     override suspend fun getList(offset: Int, limit: Int): PokemonResult {
