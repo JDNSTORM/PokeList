@@ -1,4 +1,4 @@
-package com.example.pokelist.viewmodels.repositories.poke_api.retrofit
+package com.navorjames.pokelist.core.data.network.retrofit
 
 import com.navorjames.pokelist.core.data.network.PokemonService
 import kotlinx.serialization.json.Json

@@ -3,8 +3,7 @@ package com.example.pokelist.viewmodels.repositories.poke_rooms
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import androidx.room.paging.util.getClippedRefreshKey
-import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
+import com.navorjames.pokelist.core.data.network.PokemonService
 import com.navorjames.pokelist.core.data.network.data.Pokemon
 
 class LocalPagingSource(
@@ -21,7 +20,7 @@ class LocalPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
-        val position = params.key?.takeIf { it > PokeAPIModule.DEFAULT_OFFSET } ?: PokeAPIModule.DEFAULT_OFFSET
+        val position = params.key?.takeIf { it > PokemonService.DEFAULT_OFFSET } ?: PokemonService.DEFAULT_OFFSET
         Log.d("Anchor", position.toString())
         return try {
             val pokeList = getListLocally(position, params.loadSize).takeUnless { it.isEmpty() }
@@ -30,7 +29,7 @@ class LocalPagingSource(
                     storeList(remoteList)
                     remoteList
                 }
-            val prevKey = params.key?.minus(params.loadSize)?.takeIf { it > PokeAPIModule.DEFAULT_OFFSET }
+            val prevKey = params.key?.minus(params.loadSize)?.takeIf { it > PokemonService.DEFAULT_OFFSET }
             val nextKey = if (pokeList.isEmpty()){
                 null
             }else{
@@ -55,7 +54,6 @@ class LocalPagingSource(
         val closestNextKey = closestPage?.nextKey
         val pageSize = state.config.pageSize //*
         val initialPageSize = state.config.initialLoadSize //*
-        val refreshKey = state.getClippedRefreshKey()
         val pages = state.pages.size
         val pageCount = state.pages.count { it.data.isNotEmpty() }
         val lastIndex = state.pages.lastIndex
@@ -100,7 +98,6 @@ class LocalPagingSource(
         Log.d("ClosestNextKey", closestNextKey.toString())
         Log.d("PageSize", pageSize.toString())
         Log.d("InitialPageSize", initialPageSize.toString())
-        Log.d("RefreshKey", refreshKey.toString())
         Log.d("Pages", pages.toString())
         Log.d("PageCount", pageCount.toString())
         Log.d("LastIndex", lastIndex.toString())

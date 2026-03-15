@@ -6,7 +6,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.paging.util.getClippedRefreshKey
-import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
+import com.navorjames.pokelist.core.data.network.PokemonService
 import com.navorjames.pokelist.core.data.network.data.Pokemon
 
 @Deprecated("Paging doesn't behave as intended so this Mediator is ineffective")
@@ -31,21 +31,21 @@ class LocalPagingSourceMediator(
                 state.anchorPosition?.let { position ->
                     val closestPage = state.closestPageToPosition(position)
                     closestPage?.prevKey ?: closestPage?.nextKey
-                } ?: PokeAPIModule.DEFAULT_OFFSET
+                } ?: PokemonService.DEFAULT_OFFSET
             }
             LoadType.PREPEND -> {
                 state.pages.firstOrNull() { it.data.isNotEmpty() }
-                    ?.prevKey?.takeIf { it >= PokeAPIModule.DEFAULT_OFFSET }
+                    ?.prevKey?.takeIf { it >= PokemonService.DEFAULT_OFFSET }
                     ?: return MediatorResult.Success(true)
             }
             LoadType.APPEND -> { /** Returns the Default Offset if NULL on the assumption that Initial Refresh is Skipped */
                 state.pages.lastOrNull { it.data.isNotEmpty() }?.nextKey
-                    ?: PokeAPIModule.DEFAULT_OFFSET
+                    ?: PokemonService.DEFAULT_OFFSET
             }
         }
         Log.d("Offset", offset.toString())
 
-        val pageSize = state.config.pageSize.takeUnless { offset == PokeAPIModule.DEFAULT_OFFSET }
+        val pageSize = state.config.pageSize.takeUnless { offset == PokemonService.DEFAULT_OFFSET }
             ?: state.config.initialLoadSize
         return try {
             val pokeList = loadList(offset, pageSize)

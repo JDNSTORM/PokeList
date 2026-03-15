@@ -6,12 +6,12 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.pokelist.ui.models.InfoState
-import com.navorjames.pokelist.core.data.network.PokeListMediator
-import com.navorjames.pokelist.core.data.network.RemoteDataSource
-import com.navorjames.pokelist.core.data.network.data.Pokemon
-import com.example.pokelist.viewmodels.repositories.poke_api.retrofit.PokeAPIModule
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalDataSource
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSource
+import com.navorjames.pokelist.core.data.network.PokeListMediator
+import com.navorjames.pokelist.core.data.network.PokemonService
+import com.navorjames.pokelist.core.data.network.RemoteDataSource
+import com.navorjames.pokelist.core.data.network.data.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 class PokeAPIRepository(
@@ -22,10 +22,10 @@ class PokeAPIRepository(
     @OptIn(ExperimentalPagingApi::class)
     fun getPokeListStream(): Flow<PagingData<Pokemon>> {
         val pagingConfig = PagingConfig(
-            PokeAPIModule.DEFAULT_LIMIT,
+            PokemonService.DEFAULT_LIMIT,
             enablePlaceholders = true
         )
-        val initialKey = PokeAPIModule.DEFAULT_OFFSET
+        val initialKey = PokemonService.DEFAULT_OFFSET
         val remoteMediator = PokeListMediator(
             { offset: Int, limit: Int -> remote.getListDirectly(offset, limit) },
             { list: List<Pokemon> -> local.insertList(list) },
