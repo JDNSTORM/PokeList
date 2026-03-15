@@ -5,7 +5,7 @@ plugins {
 
 kotlin {
     android {
-        namespace = "com.navorjames.pokelist.core.data.network"
+        namespace = "com.navorjames.pokelist.core.data.network.data"
 
         withHostTestBuilder {
         }
@@ -20,7 +20,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(projects.core.data.network.networkData)
+
             }
         }
 
