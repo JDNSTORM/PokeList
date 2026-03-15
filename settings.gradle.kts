@@ -18,3 +18,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "PokeList"
 include(":app")
+include(":core:data:network:network")
