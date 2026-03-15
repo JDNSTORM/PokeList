@@ -50,7 +50,7 @@ dependencies {
 
     implementation(libs.logging.interceptor)
     implementation(libs.retrofit)
-    implementation(libs.converter.gson)
+    implementation(libs.retrofit.converter.serialization)
     implementation(libs.gson)
     implementation(libs.glide)
     implementation(libs.androidx.room.runtime)
