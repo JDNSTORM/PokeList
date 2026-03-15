@@ -17,5 +17,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "PokeList"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":core:data:network:network")
