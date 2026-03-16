@@ -100,5 +100,6 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "androidGradle" }
 androidLint = { id = "com.android.lint", version.ref = "androidGradle" }
+androidxRoom = { id = "androidx.room", version.ref = "room" }
 
 [bundles]
