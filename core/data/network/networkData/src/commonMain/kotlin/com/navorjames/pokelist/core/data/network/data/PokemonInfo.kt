@@ -25,6 +25,6 @@ data class PokemonInfo(
     val sprites: Sprites = Sprites(),
 ) {
     companion object {
-        const val TABLE_NAME = "pokemon-info"
+        const val TABLE_NAME = "PokemonInfos"
     }
 }

@@ -20,7 +20,6 @@ abstract class PokemonInfoDatabase(): RoomDatabase() {
 
     companion object{
         const val DB_NAME = "pokemon-database"
-        const val POKEMON_INFO_TABLE = PokemonInfo.TABLE_NAME
         const val POKELIST_TABLE = Pokemon.TABLE_NAME
     }
 }
