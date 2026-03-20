@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     implementation(projects.core.data.network.networkKtorImpl)
+    implementation(projects.core.data.local.local)
 
     // Koin
     implementation(libs.koin.core)

@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.pokelist.ui.models.InfoState
-import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalDataSource
+import com.navorjames.pokelist.core.data.local.LocalDataSource
 import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSource
 import com.navorjames.pokelist.core.data.network.PokeListMediator
 import com.navorjames.pokelist.core.data.network.PokemonService

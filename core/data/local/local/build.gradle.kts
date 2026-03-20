@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.projectKmpAndroidLibrary)
-    alias(libs.plugins.androidLint)
     alias(libs.plugins.ksp)
     alias(libs.plugins.androidxRoom)
+    alias(libs.plugins.kotlinPluginSerialization)
 }
 
 kotlin {
@@ -24,6 +24,8 @@ kotlin {
             dependencies {
                 api(projects.core.data.network.networkData)
                 implementation(libs.androidx.room.runtime)
+                implementation(libs.androidx.room.paging)
+                implementation(libs.androidx.sqlite.bundled)
                 implementation(libs.androidx.paging.common.ktx)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.koin.core)
@@ -57,5 +59,5 @@ room {
 
 dependencies {
     kspCommonMainMetadata(libs.androidx.room.compiler)
-    kspAndroidMain(libs.androidx.room.compiler)
+    kspAndroid(libs.androidx.room.compiler)
 }

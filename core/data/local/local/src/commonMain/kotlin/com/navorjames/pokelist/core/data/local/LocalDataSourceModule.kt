@@ -1,4 +1,4 @@
-package com.example.pokelist.viewmodels.repositories.poke_rooms
+package com.navorjames.pokelist.core.data.local
 
 import org.koin.dsl.module
 

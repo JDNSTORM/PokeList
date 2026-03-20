@@ -1,4 +1,4 @@
-package com.example.pokelist.viewmodels.repositories.poke_rooms
+package com.navorjames.pokelist.core.data.local
 
 import androidx.room.TypeConverter
 import com.navorjames.pokelist.core.data.network.data.Ability
