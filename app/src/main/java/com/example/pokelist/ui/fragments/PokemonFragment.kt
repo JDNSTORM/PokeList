@@ -29,7 +29,7 @@ class PokemonFragment : BaseFragment<FragmentPokemonBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-        observeData(viewModel.viewedState, viewModel.getInfo)
+        observeData(viewModel.viewedInfoState, viewModel.getInfo)
     }
 
     private fun FragmentPokemonBinding.bind(info: PokemonInfo){

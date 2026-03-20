@@ -16,6 +16,8 @@ class LocalDataSource(
         return infoDAO.getByID(id)
     }
 
+    fun readPokemonInfoByID(id: Int) = infoDAO.read(id)
+
     suspend fun deletePokemonInfo(info: PokemonInfo){
         infoDAO.delete(info)
     }

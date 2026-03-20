@@ -7,12 +7,15 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.pokelist.ui.models.InfoState
 import com.navorjames.pokelist.core.data.local.LocalDataSource
-import com.example.pokelist.viewmodels.repositories.poke_rooms.LocalPagingSource
 import com.navorjames.pokelist.core.data.network.PokeListMediator
 import com.navorjames.pokelist.core.data.network.PokemonService
 import com.navorjames.pokelist.core.data.network.RemoteDataSource
 import com.navorjames.pokelist.core.data.network.data.Pokemon
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class PokeAPIRepository(
     val remote: RemoteDataSource,
@@ -35,12 +38,6 @@ class PokeAPIRepository(
             local.getPokeListPagingSource()
         }
 
-        val localPagingSourceFactory = { LocalPagingSource(
-            { offset: Int, limit: Int -> local.getList(offset, limit) },
-            { offset: Int, limit: Int -> remote.getListDirectly(offset, limit) },
-            { list: List<Pokemon> -> local.insertList(list) }
-        ) }
-
         return Pager(
             pagingConfig,
             initialKey,
@@ -62,6 +59,28 @@ class PokeAPIRepository(
                 Log.e("Pokemon API Call", e.message.toString())
                 InfoState.Error(e, id)
             }
+        }
+    }
+
+    fun readInfoAsState(id: Int): Flow<InfoState> = channelFlow {
+        send(InfoState.Loading)
+
+        launch {
+            local.readPokemonInfoByID(id).collectLatest {
+                if (it == null) return@collectLatest
+                send(InfoState.Loaded((it)))
+            }
+        }
+
+        if (local.readPokemonInfoByID(id).first() != null) return@channelFlow
+        try {
+            val pokemon = remote.getInfoDirectly(id)
+            local.insertPokemonInfo(pokemon)
+        }catch (e: Exception){
+            Log.e("Pokemon API Call", e.message.toString())
+            send(
+                InfoState.Error(e, id)
+            )
         }
     }
 }

@@ -33,7 +33,7 @@ class PokemonSpritesFragment : BaseFragment<FragmentPokemonSpritesBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-        observeData(viewModel.viewedState, viewModel.getInfo)
+        observeData(viewModel.viewedInfoState, viewModel.getInfo)
     }
 
     private fun FragmentPokemonSpritesBinding.bind(sprites: Sprites){
