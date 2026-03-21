@@ -10,6 +10,7 @@ import com.navorjames.pokelist.core.data.network.data.paging.PagingRemoteKeys
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlin.math.max
 
 /**
  * A [RemoteMediator] implementation designed to handle page-based pagination by synchronizing
@@ -79,10 +80,13 @@ class NetworkPagingMediator<UiModel : Any, Model : Any>(
             val result = fetchList(pageSize, offset)
             val prevKey = offset
                 .takeIf { result.previousUrl != null }
-                ?.minus(pageSize)
+                ?.minus(state.config.pageSize)
+                ?.let { previousOffest ->
+                    max(previousOffest, initialOffset)
+                }
             val nextKey = offset
                 .takeIf { result.nextUrl != null }
-                ?.plus(pageSize)
+                ?.plus(state.config.pageSize)
 
             storeItems(
                 PagedItems(
