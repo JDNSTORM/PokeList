@@ -1,12 +1,11 @@
-package com.example.pokelist.viewmodels.repositories
+package com.navorjames.pokelist.core.repositories
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.pokelist.ui.models.InfoState
 import com.navorjames.pokelist.core.data.local.LocalDataSource
+import com.navorjames.pokelist.core.data.local.data.InfoState
 import com.navorjames.pokelist.core.data.network.PokemonService
 import com.navorjames.pokelist.core.data.network.RemoteDataSource
 import com.navorjames.pokelist.core.data.network.data.Pokemon
@@ -66,7 +65,7 @@ class PokeAPIRepository(
                 local.insertPokemonInfo(pokemon)
                 InfoState.Loaded(pokemon)
             }catch (e: Exception){
-                Log.e("Pokemon API Call", e.message.toString())
+                e.printStackTrace()
                 InfoState.Error(e, id)
             }
         }
@@ -87,7 +86,7 @@ class PokeAPIRepository(
             val pokemon = remote.getInfo(id)
             local.insertPokemonInfo(pokemon)
         }catch (e: Exception){
-            Log.e("Pokemon API Call", e.message.toString())
+            e.printStackTrace()
             send(
                 InfoState.Error(e, id)
             )

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.pokelist.databinding.FragmentPokemonBinding
-import com.example.pokelist.ui.models.InfoState
+import com.navorjames.pokelist.core.data.local.data.InfoState
 import com.example.pokelist.viewmodels.MainViewModel
 import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 import kotlinx.coroutines.flow.StateFlow

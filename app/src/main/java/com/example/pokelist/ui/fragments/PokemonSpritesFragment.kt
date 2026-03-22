@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.pokelist.R
 import com.example.pokelist.databinding.FragmentPokemonSpritesBinding
-import com.example.pokelist.ui.models.InfoState
+import com.navorjames.pokelist.core.data.local.data.InfoState
 import com.example.pokelist.viewmodels.MainViewModel
 import com.navorjames.pokelist.core.data.network.data.Sprites
 import kotlinx.coroutines.flow.StateFlow

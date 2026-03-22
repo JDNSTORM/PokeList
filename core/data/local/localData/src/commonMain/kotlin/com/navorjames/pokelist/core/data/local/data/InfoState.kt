@@ -1,4 +1,4 @@
-package com.example.pokelist.ui.models
+package com.navorjames.pokelist.core.data.local.data
 
 import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 

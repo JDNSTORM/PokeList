@@ -68,6 +68,7 @@ dependencies {
 
     implementation(projects.core.data.network.networkKtorImpl)
     implementation(projects.core.data.local.local)
+    implementation(projects.core.repositories)
 
     // Koin
     implementation(libs.koin.core)

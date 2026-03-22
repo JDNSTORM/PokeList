@@ -2,8 +2,8 @@ package com.example.pokelist.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pokelist.ui.models.InfoState
-import com.example.pokelist.viewmodels.repositories.PokeAPIRepository
+import com.navorjames.pokelist.core.data.local.data.InfoState
+import com.navorjames.pokelist.core.repositories.PokeAPIRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

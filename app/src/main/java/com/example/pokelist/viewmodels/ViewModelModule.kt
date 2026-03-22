@@ -1,6 +1,6 @@
 package com.example.pokelist.viewmodels
 
-import com.example.pokelist.viewmodels.repositories.PokeAPIRepository
+import com.navorjames.pokelist.core.repositories.PokeAPIRepository
 import com.navorjames.pokelist.core.data.local.localDataSourceModule
 import com.navorjames.pokelist.core.data.network.ktor.pokemonServiceModule
 import org.koin.core.module.dsl.viewModel
