@@ -19,13 +19,7 @@ abstract class PokemonDao {
         clearData: Boolean
     ) {
         if (clearData) clearPokemons()
-        val startingPosition = if (clearData) 0
-        else getMaxPositionFromKey(pagedPokemons.prevKey)
-            ?.inc()
-            ?: getMinPositionFromKey(pagedPokemons.nextKey)
-                ?.minus(pagedPokemons.items.size)
-            ?: 0
-        val remoteKeys = pagedPokemons.remoteKeys(startingPosition)
+        val remoteKeys = pagedPokemons.remoteKeys()
 
         upsertPokemons(pagedPokemons.items)
         upsertRemoteKeys(remoteKeys)
@@ -40,11 +34,18 @@ abstract class PokemonDao {
             "ORDER BY RK.position ASC")
     abstract fun getPagingSource(): PagingSource<Int, Pokemon>
 
+    @Query("SELECT EXISTS(SELECT 1 FROM Pokemons LIMIT 1)")
+    abstract suspend fun hasPokemons(): Boolean
+
     @Query("DELETE FROM Pokemons")
-    protected abstract suspend fun clearPokemons()
+    abstract suspend fun clearPokemons()
 
     @Upsert
     protected abstract suspend fun upsertRemoteKeys(keys: List<PokemonPagingRemoteKeys>)
+
+    @Query("SELECT * FROM PokemonPagingRemoteKeys " +
+            "WHERE pokemonId = :pokemonId")
+    abstract suspend fun getRemoteKeys(pokemonId: Int): PokemonPagingRemoteKeys?
 
     @Query("SELECT MAX(position) FROM PokemonPagingRemoteKeys " +
             "WHERE currentKey = :key")

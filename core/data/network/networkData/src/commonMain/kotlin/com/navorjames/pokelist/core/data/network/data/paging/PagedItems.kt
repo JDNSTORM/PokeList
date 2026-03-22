@@ -15,4 +15,43 @@ data class PagedItems<Key: Any, Model>(
     val prevKey: Key?,
     val nextKey: Key?,
     val items: List<Model>
-)
+) {
+    companion object {
+        /**
+         * Maps the items in this [PagedItems] to a list of remote keys, calculating a unique position
+         * for each item based on the current page's offset key.
+         *
+         * @param T The type of the items in the page.
+         * @param Keys The type of remote keys to be created, implementing [PagingRemoteKeys] with an [Int] key.
+         * @param createRemoteKeys A lambda that creates a remote key instance for a given item and its calculated position.
+         */
+        inline fun <T: Any, Keys: PagingRemoteKeys<Int>> PagedItems<Int, T>.offsetBasedRemoteKeys(
+            createRemoteKeys: (T, position: Int) -> Keys
+        ): List<Keys> {
+            val offset = key ?: 0
+            return items.mapIndexed { index, item ->
+                val position = offset + index
+                createRemoteKeys(item, position)
+            }
+        }
+
+        /**
+         * Maps the items in this [PagedItems] to a list of remote keys, calculating a unique position
+         * for each item based on a provided starting position.
+         *
+         * **Usage**: This [PagedItems] uses *Page Numbers* as keys. A query will be needed to get the Min or Max Position based on the [prevKey] or [nextKey]
+         *
+         * @param T The type of the items in the page.
+         * @param Keys The type of remote keys to be created, implementing [PagingRemoteKeys] with an [Int] key.
+         * @param startingPosition The base index to start counting from for this set of items.
+         * @param createRemoteKeys A lambda that creates a remote key instance for a given item and its calculated position.
+         */
+        inline fun <T: Any, Keys: PagingRemoteKeys<Int>> PagedItems<Int, T>.pageBasedRemoteKeys(
+            startingPosition: Int,
+            createRemoteKeys: (T, position: Int) -> Keys
+        ): List<Keys> = items.mapIndexed { index, item ->
+            val position = startingPosition + index
+            createRemoteKeys(item, position)
+        }
+    }
+}
