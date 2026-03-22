@@ -30,6 +30,7 @@ import kotlin.math.max
  *                      Make sure to check if this exists to `endOfPaginationReached`.
  * @param fetchList A suspend function that executes the network request, returning [PagedData] containing items and pagination metadata.
  * @param storeItems A suspend function responsible for persisting [PagedItems] (data and keys) to the local database.
+ * @param shouldLaunchInitialRefresh a suspend function that checks whether to launch initial refresh (e.g. Data has already been cached: false)
  * @param dispatcher The [CoroutineDispatcher] to use for executing the network and database operations. Defaults to [Dispatchers.IO].
  */
 @OptIn(ExperimentalPagingApi::class)
@@ -38,9 +39,13 @@ class NetworkPagingMediator<UiModel : Any, Model : Any>(
     private val getRemoteKeys: suspend (UiModel) -> PagingRemoteKeys<Int>?,
     private val fetchList: suspend (pageSize: Int, offset: Int) -> PagedResult<Model>,
     private val storeItems: suspend (PagedItems<Int, Model>, clearData: Boolean) -> Unit,
+    private val shouldLaunchInitialRefresh: suspend () -> Boolean = { true },
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : RemoteMediator<Int, UiModel>() {
-    override suspend fun initialize(): InitializeAction = InitializeAction.SKIP_INITIAL_REFRESH
+
+    override suspend fun initialize(): InitializeAction = if(shouldLaunchInitialRefresh())
+        InitializeAction.LAUNCH_INITIAL_REFRESH
+    else InitializeAction.SKIP_INITIAL_REFRESH
 
     override suspend fun load(
         loadType: LoadType,
@@ -48,10 +53,11 @@ class NetworkPagingMediator<UiModel : Any, Model : Any>(
     ): MediatorResult = withContext(dispatcher) {
         val offset = when (loadType) {
             LoadType.REFRESH -> {
-                state.anchorPosition?.let { anchorPosition ->
+                val remoteKeys = state.anchorPosition?.let { anchorPosition ->
                     val model = state.closestItemToPosition(anchorPosition) ?: return@let null
-                    getRemoteKeys(model)?.currentKey
-                }?: initialOffset
+                    getRemoteKeys(model)
+                }
+                remoteKeys?.currentKey ?: initialOffset
             }
             LoadType.PREPEND -> {
                 val remoteKeys = state.firstItemOrNull()?.let { model ->
@@ -79,14 +85,14 @@ class NetworkPagingMediator<UiModel : Any, Model : Any>(
         try {
             val result = fetchList(pageSize, offset)
             val prevKey = offset
-                .takeIf { result.previousUrl != null }
+                .takeIf { result.previousUrl != null && it > initialOffset }
                 ?.minus(state.config.pageSize)
                 ?.let { previousOffest ->
                     max(previousOffest, initialOffset)
                 }
             val nextKey = offset
                 .takeIf { result.nextUrl != null }
-                ?.plus(state.config.pageSize)
+                ?.plus(pageSize)
 
             storeItems(
                 PagedItems(
