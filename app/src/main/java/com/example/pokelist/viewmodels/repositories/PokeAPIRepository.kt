@@ -7,7 +7,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.pokelist.ui.models.InfoState
 import com.navorjames.pokelist.core.data.local.LocalDataSource
-import com.navorjames.pokelist.core.data.network.PokeListMediator
 import com.navorjames.pokelist.core.data.network.PokemonService
 import com.navorjames.pokelist.core.data.network.RemoteDataSource
 import com.navorjames.pokelist.core.data.network.data.Pokemon
@@ -63,7 +62,7 @@ class PokeAPIRepository(
             InfoState.Loaded(it)
         } ?: run {
             try {
-                val pokemon = remote.getInfoDirectly(id)
+                val pokemon = remote.getInfo(id)
                 local.insertPokemonInfo(pokemon)
                 InfoState.Loaded(pokemon)
             }catch (e: Exception){
@@ -85,7 +84,7 @@ class PokeAPIRepository(
 
         if (local.readPokemonInfoByID(id).first() != null) return@channelFlow
         try {
-            val pokemon = remote.getInfoDirectly(id)
+            val pokemon = remote.getInfo(id)
             local.insertPokemonInfo(pokemon)
         }catch (e: Exception){
             Log.e("Pokemon API Call", e.message.toString())

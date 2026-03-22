@@ -19,8 +19,6 @@ class RemoteDataSource(private val service: PokemonService) {
         return service.getPokemonInfo(id)
     }
 
-    suspend fun getInfoDirectly(id: Int): PokemonInfo = service.getPokemonInfo(id)
-
     fun getPokeListStream(): Flow<PagingData<Pokemon>> {
         return Pager(
             PagingConfig(
@@ -35,6 +33,4 @@ class RemoteDataSource(private val service: PokemonService) {
             }
         ).flow
     }
-
-    suspend fun getListDirectly(offset: Int, limit: Int): List<Pokemon> = service.getList(offset, limit).items
 }
