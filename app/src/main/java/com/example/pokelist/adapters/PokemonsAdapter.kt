@@ -41,8 +41,8 @@ class PokemonsAdapter(
     }
 
     private fun ItemPokemonNameBinding.bind(pokemon: Pokemon){
-        pokemonId.text = pokemon.id()
+        pokemonId.text = pokemon.id.toString()
         name.text = pokemon.name.uppercase()
-        btnView.setOnClickListener { onView(pokemon.id().toInt()) }
+        btnView.setOnClickListener { onView(pokemon.id) }
     }
 }

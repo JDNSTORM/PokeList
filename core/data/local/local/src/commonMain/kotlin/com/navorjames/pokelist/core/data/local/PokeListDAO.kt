@@ -15,12 +15,12 @@ interface PokeListDAO {
     @Insert(onConflict = REPLACE)
     suspend fun insertAll(pokeList: List<Pokemon>)
 
-    @Query("SELECT * FROM `${PokemonInfoDatabase.Companion.POKELIST_TABLE}` ORDER BY dbIndex ASC")
+    @Query("SELECT * FROM Pokemons ORDER BY id ASC")
     fun getPokeList(): PagingSource<Int, Pokemon>
 
-    @Query("SELECT * FROM `${PokemonInfoDatabase.Companion.POKELIST_TABLE}` ORDER BY dbIndex ASC LIMIT :limit OFFSET :offset")
+    @Query("SELECT * FROM Pokemons ORDER BY id ASC LIMIT :limit OFFSET :offset")
     suspend fun getPokeList(offset: Int, limit: Int): List<Pokemon>
 
-    @Query("DELETE FROM `${PokemonInfoDatabase.Companion.POKELIST_TABLE}`")
+    @Query("DELETE FROM Pokemons")
     suspend fun clearTable()
 }
