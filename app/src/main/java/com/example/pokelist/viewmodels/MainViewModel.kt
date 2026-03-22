@@ -32,10 +32,4 @@ class MainViewModel(
     val getInfo: (Int) -> Unit = { id ->
         viewedPokemonIdState.update { id }
     }
-
-    init {
-        viewModelScope.launch {
-            repository.local.clearPokeList()
-        }
-    }
 }

@@ -11,6 +11,7 @@ import com.navorjames.pokelist.core.data.network.PokeListMediator
 import com.navorjames.pokelist.core.data.network.PokemonService
 import com.navorjames.pokelist.core.data.network.RemoteDataSource
 import com.navorjames.pokelist.core.data.network.data.Pokemon
+import com.navorjames.pokelist.core.data.network.paging.NetworkPagingMediator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -29,13 +30,23 @@ class PokeAPIRepository(
             enablePlaceholders = true
         )
         val initialKey = PokemonService.DEFAULT_OFFSET
-        val remoteMediator = PokeListMediator(
-            { offset: Int, limit: Int -> remote.getListDirectly(offset, limit) },
-            { list: List<Pokemon> -> local.insertList(list) },
-            { local.clearPokeList() }
+        val remoteMediator = NetworkPagingMediator<Pokemon, Pokemon>(
+            initialOffset = initialKey,
+            getRemoteKeys = {
+                local.getRemoteKeys(it.id)
+            },
+            fetchList = { pageSize, offset ->
+                remote.getList(offset, pageSize)
+            },
+            storeItems = { items, clearData ->
+                local.insertPagedPokemons(items, clearData)
+            },
+            shouldLaunchInitialRefresh = {
+                !local.hasCachedPokemons()
+            }
         )
         val pagingSourceFactory = {
-            local.getPokeListPagingSource()
+            local.getPokemonPagingSource()
         }
 
         return Pager(
@@ -50,7 +61,7 @@ class PokeAPIRepository(
         val localInfo = local.getPokemonInfoByID(id)
         return localInfo?.let {
             InfoState.Loaded(it)
-        } ?: kotlin.run {
+        } ?: run {
             try {
                 val pokemon = remote.getInfoDirectly(id)
                 local.insertPokemonInfo(pokemon)

@@ -1,12 +1,13 @@
 package com.navorjames.pokelist.core.data.local
 
 import androidx.paging.PagingSource
+import com.navorjames.pokelist.core.data.local.data.PagedPokemons
 import com.navorjames.pokelist.core.data.network.data.Pokemon
 import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 
 class LocalDataSource(
     private val infoDAO: PokemonInfoDAO,
-    private val listDAO: PokeListDAO
+    private val pokemonDao: PokemonDao
 ) {
     suspend fun insertPokemonInfo(info: PokemonInfo){
         infoDAO.insert(info)
@@ -26,11 +27,16 @@ class LocalDataSource(
         infoDAO.cleanTable()
     }
 
-    fun getPokeListPagingSource(): PagingSource<Int, Pokemon> = listDAO.getPokeList()
+    fun getPokemonPagingSource(): PagingSource<Int, Pokemon> = pokemonDao.getPagingSource()
 
-    suspend fun getList(offset: Int, limit: Int) = listDAO.getPokeList(offset, limit)
+    suspend fun hasCachedPokemons() = pokemonDao.hasPokemons()
 
-    suspend fun insertList(list: List<Pokemon>) = listDAO.insertAll(list)
+    suspend fun getRemoteKeys(pokemonId: Int) = pokemonDao.getRemoteKeys(pokemonId)
 
-    suspend fun clearPokeList() = listDAO.clearTable()
+    suspend fun insertPagedPokemons(
+        pagedPokemons: PagedPokemons,
+        clearData: Boolean
+    ) = pokemonDao.insertPagedPokemons(pagedPokemons, clearData)
+
+    suspend fun clearPokemons() = pokemonDao.clearPokemons()
 }

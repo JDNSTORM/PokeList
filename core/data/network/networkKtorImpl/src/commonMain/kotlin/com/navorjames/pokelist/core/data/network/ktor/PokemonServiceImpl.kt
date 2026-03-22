@@ -1,8 +1,9 @@
 package com.navorjames.pokelist.core.data.network.ktor
 
 import com.navorjames.pokelist.core.data.network.PokemonService
+import com.navorjames.pokelist.core.data.network.data.Pokemon
 import com.navorjames.pokelist.core.data.network.data.PokemonInfo
-import com.navorjames.pokelist.core.data.network.data.PokemonResult
+import com.navorjames.pokelist.core.data.network.data.paging.PagedResult
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -11,7 +12,7 @@ import io.ktor.http.appendPathSegments
 internal class PokemonServiceImpl(
     private val client: HttpClient
 ): PokemonService {
-    override suspend fun getList(offset: Int, limit: Int): PokemonResult {
+    override suspend fun getList(offset: Int, limit: Int): PagedResult<Pokemon> {
         return client.get(PATH_POKEMON_ID){
             url {
                 parameters.append(QUERY_OFFSET, "$offset")
@@ -20,7 +21,7 @@ internal class PokemonServiceImpl(
         }.body()
     }
 
-    override suspend fun getList(queries: Map<String, Int>): PokemonResult {
+    override suspend fun getList(queries: Map<String, Int>): PagedResult<Pokemon> {
         return client.get(PATH_POKEMON_ID){
             url {
                 queries.forEach { (query, value) ->

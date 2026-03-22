@@ -1,12 +1,13 @@
 package com.navorjames.pokelist.core.data.network
 
+import com.navorjames.pokelist.core.data.network.data.Pokemon
 import com.navorjames.pokelist.core.data.network.data.PokemonInfo
-import com.navorjames.pokelist.core.data.network.data.PokemonResult
+import com.navorjames.pokelist.core.data.network.data.paging.PagedResult
 
 interface PokemonService {
-    suspend fun getList(offset: Int, limit: Int): PokemonResult
+    suspend fun getList(offset: Int, limit: Int): PagedResult<Pokemon>
 
-    suspend fun getList(queries: Map<String, Int>): PokemonResult
+    suspend fun getList(queries: Map<String, Int>): PagedResult<Pokemon>
 
     suspend fun getPokemonInfo(pokemonId: Int): PokemonInfo
 

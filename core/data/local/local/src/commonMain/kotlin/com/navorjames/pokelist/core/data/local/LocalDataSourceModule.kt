@@ -7,7 +7,7 @@ val localDataSourceModule = module {
     single {
         LocalDataSource(
             infoDAO = get(),
-            listDAO = get()
+            pokemonDao = get()
         )
     }
 }

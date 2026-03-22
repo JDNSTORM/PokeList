@@ -6,16 +6,14 @@ import androidx.paging.PagingData
 import com.navorjames.pokelist.core.data.network.data.Pokemon
 import com.navorjames.pokelist.core.data.network.data.PokemonInfo
 import com.navorjames.pokelist.core.data.network.data.PokemonResult
+import com.navorjames.pokelist.core.data.network.data.paging.PagedResult
 import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSource(private val service: PokemonService) {
-    suspend fun getList(offset: Int, limit: Int): PokemonResult{
-        return service.getList(offset, limit)
-    }
+    suspend fun getList(offset: Int, limit: Int): PagedResult<Pokemon> =
+        service.getList(offset, limit)
 
-    suspend fun getList(queries: Map<String, Int>): PokemonResult{
-        return service.getList(queries)
-    }
+    suspend fun getList(queries: Map<String, Int>): PagedResult<Pokemon> = service.getList(queries)
 
     suspend fun getInfo(id: Int): PokemonInfo {
         return service.getPokemonInfo(id)
@@ -32,11 +30,11 @@ class RemoteDataSource(private val service: PokemonService) {
             PokemonService.DEFAULT_OFFSET,
             pagingSourceFactory = {
                 PokeListPagingSource { offset: Int, limit: Int ->
-                    service.getList(offset, limit).pokemonList
+                    service.getList(offset, limit).items
                 }
             }
         ).flow
     }
 
-    suspend fun getListDirectly(offset: Int, limit: Int): List<Pokemon> = service.getList(offset, limit).pokemonList
+    suspend fun getListDirectly(offset: Int, limit: Int): List<Pokemon> = service.getList(offset, limit).items
 }

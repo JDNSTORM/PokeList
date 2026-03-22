@@ -6,6 +6,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.navorjames.pokelist.core.data.network.data.Pokemon
 
+@Deprecated("Unreliable due to missing concrete reference like PagingRemoteKeys")
 @OptIn(ExperimentalPagingApi::class)
 class PokeListMediator(
     private val loadList: suspend (Int, Int) -> List<Pokemon>,

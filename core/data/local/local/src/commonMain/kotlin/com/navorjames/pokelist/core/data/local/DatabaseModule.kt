@@ -16,7 +16,7 @@ val databaseModule = module {
         get<PokemonInfoDatabase>().pokemonInfoDAO()
     }
     single {
-        get<PokemonInfoDatabase>().pokeListDAO()
+        get<PokemonInfoDatabase>().pokemonDao()
     }
 }
 
