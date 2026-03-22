@@ -22,7 +22,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(projects.core.data.network.networkData)
+                api(projects.core.data.local.localData)
                 implementation(libs.androidx.room.runtime)
                 implementation(libs.androidx.room.paging)
                 implementation(libs.androidx.sqlite.bundled)
